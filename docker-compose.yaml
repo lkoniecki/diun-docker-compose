@@ -9,12 +9,18 @@ services:
       - "./data:/data"
       - "/var/run/docker.sock:/var/run/docker.sock"
     environment:
-      - "TZ=Europe/Warsaw"
-      - "LOG_LEVEL=info"
-      - "LOG_JSON=false"
-      - "DIUN_WATCH_WORKERS=20"
-      - "DIUN_WATCH_SCHEDULE=0 */6 * * *"
-      - "DIUN_PROVIDERS_DOCKER=true"
+      TZ: "Europe/Warsaw"
+      LOG_LEVEL: "info"
+      LOG_JSON: "false"
+      DIUN_WATCH_WORKERS: "20"
+      DIUN_WATCH_SCHEDULE: "0 */6 * * *"
+      DIUN_PROVIDERS_DOCKER: "true"
+      DIUN_WATCH_FIRSTCHECKNOTIF: true
+      DIUN_WATCH_HEALTHCHECKS_BASEURL: "https://hc-ping.com/"
+      DIUN_WATCH_HEALTHCHECKS_UUID: ${DIUN_WATCH_HEALTHCHECKS_UUID}
+      DIUN_PROVIDERS_DOCKER_WATCHBYDEFAULT: "true"
+      DIUN_NOTIF_TELEGRAM_TOKEN: ${DIUN_NOTIF_TELEGRAM_TOKEN}
+      DIUN_NOTIF_TELEGRAM_CHATIDS: ${DIUN_NOTIF_TELEGRAM_CHATIDS}
     labels:
       - "diun.enable=true"
     restart: always
